@@ -1,0 +1,30 @@
+package views
+
+var docsUrl = "/docs/index.html"
+
+templ HomePage(baseUrl string) {
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <title>Leaflet API</title>
+            <style>
+                body { font-family: system-ui, sans-serif; max-width: 600px; margin: 60px auto; padding: 0 16px; color: #111; }
+                code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+                a { color: #1D9E75; text-decoration: none; }
+                a:hover { text-decoration: underline; }
+                hr { border: none; border-top: 1px solid #eee; margin: 24px 0; }
+                p { color: #555; line-height: 1.6; }
+            </style>
+        </head>
+        <body>
+            <h1>Leaflet API</h1>
+            <p>A public note-card platform API.</p>
+            <hr/>
+            <p>Base URL: <code>https://api.leaflet-dev.com/api</code></p>
+            <p><a href={ templ.SafeURL(baseUrl + docsUrl) }>→ Swagger documentation</a></p>
+            <hr/>
+            <p>Built with Go · Echo v5 · PostgreSQL</p>
+        </body>
+    </html>
+}

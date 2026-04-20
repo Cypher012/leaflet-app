@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+.output/
+.vinxi/
+
+# TanStack Router / Query generated
+.tanstack/
+
+# Wrangler / Cloudflare
+.wrangler/
+
+# Nitro (if used)
+.nitro/
+
+# Env files
+.env
+.env.*
+*.local
+
+# Logs
+*.log
+*.log.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# TypeScript
+*.tsbuildinfo
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Bun
+bun.lockb
+
+# Unconfig (you already had this)
+__unconfig*
+
+# Misc project-specific
+todos.json

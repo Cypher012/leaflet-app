@@ -1,0 +1,244 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/geist';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   THE DIGITAL HERBARIUM — Design System Override
+   Botanical Archivist · Organic Sophistication
+   ============================================================ */
+
+:root {
+  /* --- Core Surfaces (Tonal Layering, no shadows) --- */
+  /* Level 0 — Base surface: #f8faf9 */
+  --background: oklch(0.9765 0.005 150); /* #f8faf9 surface */
+  /* Foreground: on_surface #191c1c (never pure black) */
+  --foreground: oklch(0.132 0.006 152); /* #191c1c on_surface */
+
+  /* Level 2 — Card / interactive lift: #ffffff surface_container_lowest */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.132 0.006 152);
+
+  /* Popover mirrors card */
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.132 0.006 152);
+
+  /* --- Primary: deep botanical green #003925 → #0f5238 gradient source --- */
+  --primary: oklch(0.283 0.082 157); /* #003925 */
+  --primary-foreground: oklch(0.9765 0.005 150); /* white-ish on dark green */
+
+  /* --- Secondary: #506856 on_secondary_container, bg #cce6d0 --- */
+  --secondary: oklch(85.787% 0.04311 152.792); /* #cce6d0 secondary_container */
+  --secondary-foreground: oklch(
+    0.424 0.043 152
+  ); /* #506856 on_secondary_container */
+
+  /* --- Muted: Level 1 section surface #f2f4f3 --- */
+  --muted: oklch(0.956 0.004 152); /* #f2f4f3 surface_container_low */
+  --muted-foreground: oklch(0.452 0.028 152); /* subdued botanical text */
+
+  /* --- Accent: #2d6a4f mid-green (gradient endpoint) --- */
+  --accent: oklch(0.438 0.076 157); /* #2d6a4f */
+  --accent-foreground: oklch(1 0 0);
+
+  /* --- Destructive (kept functional) --- */
+  --destructive: oklch(0.5386 0.1937 26.7249);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* --- Borders: Ghost Borders — outline_variant at ~15% opacity ---
+       We encode a soft mineral green; opacity applied at use-site via /15 */
+  --border: oklch(0.72 0.03 152); /* outline_variant base */
+  --input: oklch(0.956 0.004 152); /* surface_container_low for inputs */
+  --ring: oklch(0.438 0.076 157); /* accent / primary focus ring */
+
+  /* --- Charts: botanical green ramp --- */
+  --chart-1: oklch(0.72 0.11 152);
+  --chart-2: oklch(0.62 0.106 152);
+  --chart-3: oklch(0.52 0.098 152);
+  --chart-4: oklch(0.438 0.076 152);
+  --chart-5: oklch(0.283 0.082 157);
+
+  /* --- Sidebar: Level 1 surface #f2f4f3 --- */
+  --sidebar: oklch(0.956 0.004 152);
+  --sidebar-foreground: oklch(0.132 0.006 152);
+  --sidebar-primary: oklch(0.283 0.082 157);
+  --sidebar-primary-foreground: oklch(0.9765 0.005 150);
+  --sidebar-accent: oklch(0.858 0.043 152); /* secondary_container */
+  --sidebar-accent-foreground: oklch(0.424 0.043 152);
+  --sidebar-border: oklch(0.72 0.03 152);
+  --sidebar-ring: oklch(0.438 0.076 157);
+
+  /* --- Typography --- */
+  --font-sans: 'Inter Variable', Inter, ui-sans-serif, sans-serif;
+  --font-serif: Merriweather, serif;
+  --font-mono: 'Source Code Pro', monospace;
+
+  /* --- Radius: nature has no sharp corners ---
+       Base = 0.75rem (inputs/DEFAULT), cards = 1.5rem (md override below) */
+  --radius: 0.75rem;
+
+  /* --- Elevation: Ghost Shadow for hover only ---
+       "0 12px 40px rgba(25, 28, 28, 0.06)" — no ambient shadows */
+  --shadow-x: 0;
+  --shadow-y: 12px;
+  --shadow-blur: 40px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.06;
+  --shadow-color: oklch(0.132 0.006 152);
+
+  /* All shadow scales are intentionally ghost-light per the "no drop shadow" rule */
+  --shadow-2xs: 0 2px 8px 0px oklch(0.132 0.006 152 / 0.03);
+  --shadow-xs: 0 4px 12px 0px oklch(0.132 0.006 152 / 0.04);
+  --shadow-sm: 0 6px 20px 0px oklch(0.132 0.006 152 / 0.05);
+  --shadow: 0 12px 40px 0px oklch(0.132 0.006 152 / 0.06); /* The Ghost Shadow */
+  --shadow-md: 0 12px 40px 0px oklch(0.132 0.006 152 / 0.06);
+  --shadow-lg: 0 12px 40px 0px oklch(0.132 0.006 152 / 0.07);
+  --shadow-xl: 0 16px 48px 0px oklch(0.132 0.006 152 / 0.08);
+  --shadow-2xl: 0 20px 60px 0px oklch(0.132 0.006 152 / 0.1);
+
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+/* ============================================================
+   DARK MODE — Deep Botanical
+   ============================================================ */
+.dark {
+  /* Base: deep forest backdrop */
+  --background: oklch(0.205 0.038 157); /* very deep green */
+  --foreground: oklch(0.94 0.006 150); /* near-white warm */
+
+  --card: oklch(0.26 0.034 154);
+  --card-foreground: oklch(0.94 0.006 150);
+
+  --popover: oklch(0.26 0.034 154);
+  --popover-foreground: oklch(0.94 0.006 150);
+
+  /* Primary brightened for dark context */
+  --primary: oklch(0.52 0.11 152); /* lighter botanical green */
+  --primary-foreground: oklch(0.132 0.006 152);
+
+  --secondary: oklch(0.34 0.045 152);
+  --secondary-foreground: oklch(0.858 0.043 152);
+
+  --muted: oklch(0.28 0.028 154);
+  --muted-foreground: oklch(0.72 0.02 152);
+
+  --accent: oklch(0.49 0.09 157);
+  --accent-foreground: oklch(0.94 0.006 150);
+
+  --destructive: oklch(0.5386 0.1937 26.7249);
+  --destructive-foreground: oklch(0.94 0.006 150);
+
+  --border: oklch(0.34 0.045 152);
+  --input: oklch(0.34 0.045 152);
+  --ring: oklch(0.62 0.106 152);
+
+  --chart-1: oklch(0.78 0.12 152);
+  --chart-2: oklch(0.72 0.11 152);
+  --chart-3: oklch(0.62 0.106 152);
+  --chart-4: oklch(0.56 0.102 152);
+  --chart-5: oklch(0.49 0.09 157);
+
+  --sidebar: oklch(0.205 0.038 157);
+  --sidebar-foreground: oklch(0.94 0.006 150);
+  --sidebar-primary: oklch(0.62 0.106 152);
+  --sidebar-primary-foreground: oklch(0.132 0.006 152);
+  --sidebar-accent: oklch(0.52 0.11 152);
+  --sidebar-accent-foreground: oklch(0.94 0.006 150);
+  --sidebar-border: oklch(0.34 0.045 152);
+  --sidebar-ring: oklch(0.62 0.106 152);
+
+  /* Dark shadows are imperceptibly deeper */
+  --shadow-2xs: 0 2px 8px 0px oklch(0 0 0 / 0.12);
+  --shadow-xs: 0 4px 12px 0px oklch(0 0 0 / 0.16);
+  --shadow-sm: 0 6px 20px 0px oklch(0 0 0 / 0.18);
+  --shadow: 0 12px 40px 0px oklch(0 0 0 / 0.2);
+  --shadow-md: 0 12px 40px 0px oklch(0 0 0 / 0.2);
+  --shadow-lg: 0 12px 40px 0px oklch(0 0 0 / 0.24);
+  --shadow-xl: 0 16px 48px 0px oklch(0 0 0 / 0.28);
+  --shadow-2xl: 0 20px 60px 0px oklch(0 0 0 / 0.36);
+}
+
+/* ============================================================
+   THEME INLINE MAPPINGS — Tailwind v4 token bridge
+   ============================================================ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  /* Radius scale — organic, nothing sharp
+     sm = inputs/fields (0.75rem)
+     md = cards (1.5rem)
+     lg = modals / large containers
+     xl = pill (9999px via utility) */
+  --radius-sm: var(--radius); /* 0.75rem — inputs */
+  --radius-md: calc(var(--radius) * 2); /* 1.5rem  — cards */
+  --radius-lg: calc(var(--radius) * 2.5); /* 1.875rem — large surfaces */
+  --radius-xl: calc(var(--radius) * 3); /* 2.25rem — modals */
+
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+}
+
+/* ============================================================
+   BASE LAYER — Herbarium Global Resets
+   ============================================================ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:py-10;
+  }
+}

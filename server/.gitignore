@@ -1,0 +1,59 @@
+# Binaries / build output
+/build
+/tmp
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.out
+*.test
+*.bin
+
+# Go workspace / tooling
+go.work
+go.work.sum
+
+# Logs
+*.log
+*.log.*
+
+# Environment / config
+.env
+.env.*
+*.local
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated files (optional — keep if you want them versioned)
+# sqlc generated files (uncomment if you regenerate them)
+internal/platform/db/*.sql.go
+
+# Swagger generated (uncomment if auto-generated)
+docs/swagger.json
+docs/swagger.yaml
+docs/docs.go
+
+# Temp / misc
+*.tmp
+*.cache
+
+# Test artifacts
+coverage.out
+*.coverprofile
+
+# Playground build artifacts
+playground/tmp/
+playground/build/
+
+# Templ generated files (if using templ and regenerating)
+# views/*_templ.go
