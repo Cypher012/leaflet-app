@@ -6,4 +6,4 @@
 - [ x ] Add loading skeleton screen to pages
 - [ x ] Add like functionality and optimistic updates to comments
 - [ x ] Add comments optimistic updates to comments
-- [ ] Implement api integration for profile page
+- [ x ] Implement api integration for profile page

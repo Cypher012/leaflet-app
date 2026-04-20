@@ -70,6 +70,7 @@ type UserActivity struct {
 	FeedImage       string    `json:"feed_image,omitempty"`
 	CommentBody     string    `json:"comment_body,omitempty"`
 	ParentFeedTitle string    `json:"parent_feed_title,omitempty"`
+	CommentFeedID   string    `json:"comment_feed_id,omitempty"`
 	Stats           UserStats `json:"stats"`
 	CreatedAt       time.Time `json:"created_at"`
 }
@@ -87,6 +88,7 @@ type UserComment struct {
 	ID        string                  `json:"id"`
 	Title     string                  `json:"title,omitempty"`
 	Content   string                  `json:"content"`
+	FeedID    string                  `json:"feed_id"`
 	CreatedAt time.Time               `json:"created_at"`
 	Stats     ProfileUserCommentStats `json:"stats"`
 }
@@ -126,6 +128,7 @@ func NormalizeUserActivity(rows []db.UserActivityRow) []UserActivity {
 			Content:         a.Content.String,
 			CommentBody:     a.CommentBody,
 			ParentFeedTitle: a.ParentFeedTitle,
+			CommentFeedID:   a.CommentFeedID.String(),
 			FeedImage:       a.FeedImage.String,
 			CreatedAt:       a.CreatedAt.Time,
 			Stats: UserStats{
@@ -168,6 +171,7 @@ func NormalizeUserComments(rows []db.UserCommentsRow) []UserComment {
 			ID:        c.ID.String(),
 			Title:     c.Title.String,
 			Content:   c.Content,
+			FeedID:    c.FeedID.String(),
 			CreatedAt: c.CreatedAt.Time,
 			Stats: ProfileUserCommentStats{
 				LikeCount: int(c.LikeCount),

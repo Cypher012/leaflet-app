@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/ui/avatar'
 import { Button } from '#/components/ui/button'
 import { Textarea } from '#/components/ui/textarea'
@@ -29,10 +29,8 @@ export const CommentItem = ({
     feedId,
     commentId: comment.id,
   })
-
-
+ 
   const { mutate: postReply, isPending } = useCreateReply(feedId, comment.id, user as FeedComment["author"])
-  
 
   const handleReply = () => {
     if (!replyValue.trim()) return
@@ -44,7 +42,7 @@ export const CommentItem = ({
   const isOptimistic = comment.id.startsWith('temp-')
 
   return (
-    <div className={cn("flex gap-3", isOptimistic && "opacity-50 pointer-events-none")}>
+    <div id={`comment-${comment.id}`} className={cn("flex gap-3", isOptimistic && "opacity-50 pointer-events-none")}>
       <div className="flex flex-col items-center">
         <Avatar className={isReply ? 'size-8' : 'size-10'}>
           <AvatarImage

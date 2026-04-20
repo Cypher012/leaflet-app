@@ -1,7 +1,10 @@
-import { Dot, Heart, MessageSquare } from 'lucide-react'
+import { Dot, Heart, Leaf, MessageSquare } from 'lucide-react'
 import type { FeedCardProps } from '../types'
 import { formatRelativeTime } from '#/lib/time'
 import { Link } from '@tanstack/react-router'
+import { useLike } from '#/hooks/useLike'
+import LikeButton from '#/components/ui/likeButton'
+import { cn } from '#/lib/utils'
 
 const FeedCardProfile = ({
   id,
@@ -11,6 +14,7 @@ const FeedCardProfile = ({
   createdAt,
   stats,
 }: FeedCardProps) => {
+  
   return (
     <Link to='/feeds/$feedId' params={{feedId: id}} className="bg-card text-card-foreground rounded-2xl p-5 flex gap-4 w-full">
       <div className="flex flex-col flex-1 gap-3 relative">
@@ -27,12 +31,12 @@ const FeedCardProfile = ({
           {content}
         </p>
 
-        <div className="flex items-center gap-4 text-muted-foreground">
-          <button className="flex items-center gap-1.5 text-sm hover:text-foreground transition-colors">
-            <Heart className="size-4" />
+        <div className="flex items-center gap-3 text-muted-foreground">
+          <div className="flex text-xs items-center gap-2 text-[#7A8C83]">
+           <Leaf className={cn('w-4 h-4', stats.is_liked ? 'text-primary fill-primary' : '')} />
             <span>{stats.like_count}</span>
-          </button>
-          <button className="flex items-center gap-1.5 text-sm hover:text-foreground transition-colors">
+          </div>
+          <button className="flex items-center gap-1.5 text-xs hover:text-foreground transition-colors">
             <MessageSquare className="size-4" />
             <span>{stats.comment_count}</span>
           </button>

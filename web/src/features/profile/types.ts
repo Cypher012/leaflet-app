@@ -17,6 +17,7 @@ export type ProfileOverviewResponse = {
       created_at: string,
       id: string,
       parent_feed_title: string,
+      comment_feed_id: string
       feed_image: string,
       stats: {
         comment_count: number,
@@ -31,6 +32,7 @@ export type ProfileCommentResponse = {
     content: string,
     created_at: string,
     id: string,
+    feed_id: string
     stats: {
     is_liked: boolean,
     like_count: number
@@ -65,10 +67,13 @@ export type FeedCardProps = {
 }
 
 export type CommentCardProps = {
+  id: string
   postTitle: string
+  feedId: string
   commentBody: string
   timestamp: string
-  likes: number
+  is_liked: boolean,
+  like_count: number
 }
 
 

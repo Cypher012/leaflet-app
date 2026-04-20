@@ -31,6 +31,7 @@ WITH activity AS (
         f.feed_image  AS feed_image,
         ''::TEXT    AS comment_body,
         ''::TEXT    AS parent_feed_title,
+        NULL::UUID    AS comment_feed_id,
         (SELECT COUNT(*) FROM likes l WHERE l.feed_id = f.id)       AS like_count,
         (SELECT COUNT(*) FROM comments c WHERE c.feed_id = f.id)  AS comment_count,
         EXISTS (
@@ -53,6 +54,7 @@ WITH activity AS (
         ''::TEXT    AS feed_image,
         c.content    AS comment_body,
         f.title       AS parent_feed_title,
+        c.feed_id    AS comment_feed_id,
         (SELECT COUNT(*) FROM likes l WHERE l.comment_id = c.id)   AS like_count,
         0::BIGINT  AS comment_count,
         EXISTS (
@@ -82,6 +84,7 @@ LIMIT sqlc.arg('limit');
 SELECT
     c.id,
     f.title,
+    c.feed_id,
     c.content,
     c.created_at,
     (SELECT COUNT(*) FROM likes l WHERE l.comment_id = c.id) AS like_count,

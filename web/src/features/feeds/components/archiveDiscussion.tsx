@@ -14,23 +14,19 @@ import PulsarLoader from '#/components/web/pulsar-loader'
 const ArchiveDiscussion = ({
   user,
   feedId,
+  commentId,
 }: {
   user: UserResponse | null
   feedId: string
+  commentId?:string
 }) => {
   const [value, setValue] = useState('')
   const [shouldFetch, setShouldFetch] = useState(false)
+  const [done, setDone] = useState(false)
   const { mutateAsync: postComment, isPending } = useCreateComment(feedId, user as FeedComment["author"])
   const ref = useRef<HTMLDivElement | null>(null)
-  const [isVisible] = useElementVisibility(ref)
-
-  useEffect(() => {
-    if (isVisible && !shouldFetch) {
-      console.log('visible')
-      setShouldFetch(true)
-    }
-  }, [isVisible])
-
+  
+  
   const query = useInfiniteQuery({
     ...CommentsInfiniteQueryOptions(feedId),
     enabled: shouldFetch,
@@ -42,6 +38,35 @@ const ArchiveDiscussion = ({
     isFetchingNextPage,
     isLoading,
   } = useInfiniteScroll<FeedComment>(query)
+
+  const [isVisible] = useElementVisibility(ref)
+
+  useEffect(() => {
+    if (commentId) {
+      setShouldFetch(true)
+      return
+    }
+
+    if (isVisible && !shouldFetch) {
+      setShouldFetch(true)
+    }
+  }, [isVisible, commentId, shouldFetch])
+  
+  useEffect(() => {
+    if (!commentId || done) return
+
+    const el = document.getElementById(`comment-${commentId}`)
+
+    if (el) {
+      el.scrollIntoView({ block: 'center' })
+      setDone(true)
+      return
+    }
+
+    if (query.hasNextPage && !query.isFetchingNextPage) {
+      query.fetchNextPage()
+    }
+  }, [commentId, comments, query.hasNextPage, query.isFetchingNextPage, done])
   
   const handlePostComment = async () => {
       if (!value.trim()) return

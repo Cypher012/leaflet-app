@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { FeedsInfiniteQueryOptions } from '../api/queries'
-import type { PublicFeed } from '../type'
+import { FeedsInfiniteQueryOptions } from '../../api/queries'
+import type { PublicFeed } from '../../type'
 import { FeedCardSkeleton } from '#/features/feeds/components/feedcard-skeleton'
 import { useInfiniteScroll } from '#/hooks/useInfiiteScroll'
 import FeedCard from '#/features/feeds/components/feedcard'

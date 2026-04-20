@@ -30,4 +30,5 @@ export const getMeQueryOptions = queryOptions({
   queryKey: ['user'],
   queryFn: () => getMe(),
   staleTime: 5 * 60 * 1000,
+  retry: 3 
 })

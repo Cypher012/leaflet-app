@@ -60,10 +60,13 @@ const OverviewPage = ({ username }: { username: string }) => {
             return (
               <CommentCard
                 key={item.id}
+                id={item.id}
+                feedId={item.comment_feed_id}
                 postTitle={item.parent_feed_title}
                 commentBody={item.comment_body}
                 timestamp={item.created_at}
-                likes={item.stats.like_count}
+                is_liked={item.stats.is_liked}
+                like_count={item.stats.like_count}
               />
             )
           }

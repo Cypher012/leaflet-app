@@ -1,15 +1,24 @@
-import { MessageSquare, ThumbsUp } from 'lucide-react'
+import {  Leaf, MessageSquare, ThumbsUp } from 'lucide-react'
 import type { CommentCardProps } from '../types'
 import { formatRelativeTime } from '#/lib/time'
+import { Link } from '@tanstack/react-router'
+import { useLike } from '#/hooks/useLike'
+import { cn } from '#/lib/utils'
 
 export const CommentCard = ({
+  id,
+  feedId,
   postTitle,
   commentBody,
   timestamp,
-  likes,
+  like_count,
+  is_liked
 }: CommentCardProps) => {
+
+  const {handleLike} = useLike({entity:"comment", feedId, commentId: id})
+
   return (
-    <div className="max-w-full p-5 bg-secondary/20 rounded-2xl">
+    <Link to="/feeds/$feedId" params={{feedId: feedId}} search={{commentId: id}} className="block max-w-full p-5 bg-secondary/20 rounded-2xl">
       <div className="space-y-6">
         {/* Header Section */}
         <div className="flex items-center gap-3">
@@ -35,12 +44,12 @@ export const CommentCard = ({
           <span className="text-xs font-medium text-[#7A8C83]">
             {formatRelativeTime(timestamp)}
           </span>
-          <div className="flex items-center gap-2 text-[#7A8C83]">
-            <ThumbsUp className="w-4 h-4 fill-current opacity-70" />
-            <span className="text-sm font-semibold">{likes}</span>
+          <div className="flex items-center text-xs gap-2 text-[#7A8C83]">
+           <Leaf className={cn('w-4 h-4', is_liked ? 'text-primary fill-primary' : '')} />
+            <span>{like_count}</span>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

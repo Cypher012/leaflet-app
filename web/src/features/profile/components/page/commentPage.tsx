@@ -27,10 +27,13 @@ const CommentPage = ({ username }: { username: string }) => {
             comments.map((comment) => (
                 <CommentCard
                     key={comment.id}
+                    id={comment.id}
+                    feedId={comment.feed_id}
                     postTitle={comment.title}
                     commentBody={comment.content}
                     timestamp={comment.created_at}
-                    likes={comment.stats.like_count}
+                    is_liked={comment.stats.is_liked}
+                    like_count={comment.stats.like_count}
                 />
             ))
         }

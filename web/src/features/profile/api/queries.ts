@@ -17,10 +17,6 @@ export const useUserProfileQuery = (username: string) =>
   useQuery({
     queryKey: ['profile', username],
     queryFn: () => fetchUserProfile(username),
-    refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
-    retry: 2,
 })
 
 const fetchProfileOverview = async (
@@ -42,10 +38,6 @@ export const ProfileOverviewInfiniteQueryOptions = (username: string) => infinit
   getNextPageParam: (lastPage) =>
     lastPage.meta.has_next ? lastPage.meta.next_cursor : undefined,
   initialPageParam: '',
-  staleTime: 1000 * 60 * 3, 
-  gcTime: 1000 * 60 * 10,
-  refetchOnWindowFocus: false,
-  // refetchOnMount: false, // don't refetch when scrolling back to the list — preserves scroll position + optimistic updates
 })
 
 
@@ -68,10 +60,6 @@ export const ProfileFeedsInfiniteQueryOptions = (username: string) => infiniteQu
   getNextPageParam: (lastPage) =>
     lastPage.meta.has_next ? lastPage.meta.next_cursor : undefined,
   initialPageParam: '',
-  staleTime: 1000 * 60 * 3, // feeds list goes stale faster than a single feed
-  gcTime: 1000 * 60 * 10,
-  refetchOnWindowFocus: false,
-  refetchOnMount: false, // don't refetch when scrolling back to the list — preserves scroll position + optimistic updates
 })
 
 const fetchProfileComments = async (
@@ -93,8 +81,4 @@ export const ProfileCommentsInfiniteQueryOptions = (username: string) => infinit
   getNextPageParam: (lastPage) =>
     lastPage.meta.has_next ? lastPage.meta.next_cursor : undefined,
   initialPageParam: '',
-  staleTime: 1000 * 60 * 3, // feeds list goes stale faster than a single feed
-  gcTime: 1000 * 60 * 10,
-  refetchOnWindowFocus: false,
-  refetchOnMount: false, // don't refetch when scrolling back to the list — preserves scroll position + optimistic updates
 })
