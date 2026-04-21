@@ -38,10 +38,6 @@ Thumbs.db
 # sqlc generated files (uncomment if you regenerate them)
 internal/platform/db/*.sql.go
 
-# Swagger generated (uncomment if auto-generated)
-docs/swagger.json
-docs/swagger.yaml
-docs/docs.go
 
 # Temp / misc
 *.tmp

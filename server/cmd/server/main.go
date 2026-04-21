@@ -39,9 +39,9 @@ import (
 // @in cookie
 // @name leaflet_sid
 func main() {
-	err := godotenv.Load()
 	logger := logger.NewLogger()
 
+	err := godotenv.Load()
 	if err != nil {
 		logger.Error("Error loading .env file")
 	}
