@@ -34,11 +34,6 @@ go.work.sum
 .DS_Store
 Thumbs.db
 
-# Generated files (optional — keep if you want them versioned)
-# sqlc generated files (uncomment if you regenerate them)
-internal/platform/db/*.sql.go
-
-
 # Temp / misc
 *.tmp
 *.cache

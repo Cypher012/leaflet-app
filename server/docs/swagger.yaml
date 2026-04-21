@@ -325,7 +325,6 @@ definitions:
       upload_url:
         type: string
     type: object
-host: api.leaflet-dev.com
 info:
   contact: {}
   description: Leaflet discussion forum platform API

@@ -18,8 +18,10 @@ dist-ssr/
 
 # Env files
 .env
-.env.*
 *.local
+*.development
+*.production
+
 
 # Logs
 *.log

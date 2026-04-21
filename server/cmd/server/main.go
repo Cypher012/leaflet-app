@@ -32,7 +32,6 @@ import (
 // @title Leaflet API
 // @version 1.0
 // @description Leaflet discussion forum platform API
-// @host api.leaflet-dev.com
 // @BasePath /api
 
 // @securityDefinitions.apikey SessionAuth

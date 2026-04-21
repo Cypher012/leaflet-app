@@ -6,7 +6,6 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "api.leaflet-dev.com",
     "basePath": "/api",
     "paths": {
         "/auth/logout": {
