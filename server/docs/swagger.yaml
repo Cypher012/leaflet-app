@@ -1,0 +1,904 @@
+basePath: /api
+definitions:
+  auth.DocMinimalProfileResponse:
+    properties:
+      data:
+        $ref: '#/definitions/auth.MinimalUserProfile'
+      message:
+        type: string
+    type: object
+  auth.DocSessionResponse:
+    properties:
+      data:
+        $ref: '#/definitions/auth.SessionResponse'
+      message:
+        type: string
+    type: object
+  auth.MinimalUserProfile:
+    properties:
+      avatar_url:
+        type: string
+      fullname:
+        type: string
+      username:
+        type: string
+    type: object
+  auth.SessionResponse:
+    properties:
+      expires_at:
+        type: string
+      id:
+        type: string
+      ip_address:
+        type: string
+      user_agent:
+        type: string
+      user_id:
+        type: string
+    type: object
+  comment.DocCommentsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/comment.FeedComment'
+        type: array
+      message:
+        type: string
+      meta:
+        $ref: '#/definitions/response.PaginationMeta'
+    type: object
+  comment.FeedComment:
+    properties:
+      author:
+        $ref: '#/definitions/comment.FeedCommentAuthor'
+      content:
+        type: string
+      created_at:
+        type: string
+      feed_id:
+        type: string
+      id:
+        type: string
+      parent_id:
+        type: string
+      replies:
+        items:
+          $ref: '#/definitions/comment.FeedComment'
+        type: array
+      stats:
+        $ref: '#/definitions/comment.FeedCommentStats'
+    type: object
+  comment.FeedCommentAuthor:
+    properties:
+      avatar_url:
+        type: string
+      fullname:
+        type: string
+      username:
+        type: string
+    type: object
+  comment.FeedCommentStats:
+    properties:
+      is_liked:
+        type: boolean
+      like_count:
+        type: integer
+    type: object
+  comment.NewComment:
+    properties:
+      content:
+        type: string
+    type: object
+  feed.CreateFeedReq:
+    properties:
+      content:
+        maxLength: 5000
+        minLength: 1
+        type: string
+      feed_image:
+        type: string
+      title:
+        maxLength: 120
+        minLength: 1
+        type: string
+    required:
+    - content
+    - title
+    type: object
+  feed.DocFeedResponse:
+    properties:
+      data:
+        $ref: '#/definitions/feed.Feed'
+      message:
+        type: string
+    type: object
+  feed.DocFeedsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/feed.Feed'
+        type: array
+      message:
+        type: string
+      meta:
+        $ref: '#/definitions/response.PaginationMeta'
+    type: object
+  feed.Feed:
+    properties:
+      author:
+        $ref: '#/definitions/feed.FeedAuthor'
+      content:
+        type: string
+      created_at:
+        type: string
+      feed_image:
+        type: string
+      id:
+        type: string
+      is_liked:
+        type: boolean
+      stats:
+        $ref: '#/definitions/feed.FeedStats'
+      title:
+        type: string
+    type: object
+  feed.FeedAuthor:
+    properties:
+      avatar_url:
+        type: string
+      fullname:
+        type: string
+      username:
+        type: string
+    type: object
+  feed.FeedStats:
+    properties:
+      comments:
+        type: integer
+      likes:
+        type: integer
+    type: object
+  profile.DocUserActivityResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/profile.UserActivity'
+        type: array
+      message:
+        type: string
+      meta:
+        $ref: '#/definitions/response.PaginationMeta'
+    type: object
+  profile.DocUserFeedCommentResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/profile.UserComment'
+        type: array
+      message:
+        type: string
+      meta:
+        $ref: '#/definitions/response.PaginationMeta'
+    type: object
+  profile.DocUserProfileResponse:
+    properties:
+      data:
+        $ref: '#/definitions/profile.PublicUserProfile'
+      message:
+        type: string
+    type: object
+  profile.DocUserPublicFeedResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/profile.UserFeed'
+        type: array
+      message:
+        type: string
+      meta:
+        $ref: '#/definitions/response.PaginationMeta'
+    type: object
+  profile.ProfileUserCommentStats:
+    properties:
+      is_liked:
+        type: boolean
+      like_count:
+        type: integer
+    type: object
+  profile.ProfileUserStats:
+    properties:
+      comment_count:
+        type: integer
+      feed_count:
+        type: integer
+      like_count:
+        type: integer
+    type: object
+  profile.PublicUserProfile:
+    properties:
+      avatar_url:
+        type: string
+      bio:
+        type: string
+      fullname:
+        type: string
+      id:
+        type: string
+      stats:
+        $ref: '#/definitions/profile.ProfileUserStats'
+      username:
+        type: string
+    type: object
+  profile.UserActivity:
+    properties:
+      comment_body:
+        type: string
+      comment_feed_id:
+        type: string
+      content:
+        type: string
+      created_at:
+        type: string
+      feed_image:
+        type: string
+      id:
+        type: string
+      parent_feed_title:
+        type: string
+      stats:
+        $ref: '#/definitions/profile.UserStats'
+      title:
+        type: string
+      type:
+        type: string
+    type: object
+  profile.UserComment:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      feed_id:
+        type: string
+      id:
+        type: string
+      stats:
+        $ref: '#/definitions/profile.ProfileUserCommentStats'
+      title:
+        type: string
+    type: object
+  profile.UserFeed:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      feed_image:
+        type: string
+      id:
+        type: string
+      stats:
+        $ref: '#/definitions/profile.UserStats'
+      title:
+        type: string
+    type: object
+  profile.UserStats:
+    properties:
+      comment_count:
+        type: integer
+      is_liked:
+        type: boolean
+      like_count:
+        type: integer
+    type: object
+  response.DocBaseResponse:
+    properties:
+      message:
+        example: Operation successful
+        type: string
+    type: object
+  response.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  response.PaginationMeta:
+    properties:
+      count:
+        type: integer
+      has_next:
+        type: boolean
+      next_cursor:
+        type: string
+    type: object
+  upload.DocPresignResponse:
+    properties:
+      data:
+        $ref: '#/definitions/upload.PresignResponse'
+      message:
+        type: string
+    type: object
+  upload.PresignResponse:
+    properties:
+      public_url:
+        type: string
+      upload_url:
+        type: string
+    type: object
+host: api.leaflet-dev.com
+info:
+  contact: {}
+  description: Leaflet discussion forum platform API
+  title: Leaflet API
+  version: "1.0"
+paths:
+  /auth/{provider}:
+    get:
+      description: Redirects user to OAuth provider (Google, GitHub, etc.)
+      parameters:
+      - description: OAuth provider (e.g. google, github)
+        in: path
+        name: provider
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Redirect to frontend after successful login
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: OAuth login
+      tags:
+      - auth
+  /auth/{provider}/callback:
+    get:
+      description: Handles OAuth provider callback, creates session, and sets cookie
+      parameters:
+      - description: OAuth provider (e.g. google, github)
+        in: path
+        name: provider
+        required: true
+        type: string
+      produces:
+      - text/plain
+      responses:
+        "302":
+          description: Redirect to frontend after successful authentication
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: OAuth callback
+      tags:
+      - auth
+  /auth/logout:
+    post:
+      description: Deletes user session and clears session cookie
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Logout user
+      tags:
+      - auth
+  /auth/me:
+    get:
+      description: Returns basic profile information of the currently authenticated
+        user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/auth.DocMinimalProfileResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Get current user
+      tags:
+      - auth
+  /auth/session:
+    get:
+      description: Returns the currently authenticated user session
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/auth.DocSessionResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Get user session
+      tags:
+      - auth
+  /comments/{comment_id}/like:
+    post:
+      description: Like or unlike a comment
+      parameters:
+      - description: Comment ID
+        in: path
+        name: comment_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.DocBaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Toggle comment like
+      tags:
+      - likes
+  /comments/{comment_id}/replies:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Comment Id
+        in: path
+        name: comment_id
+        required: true
+        type: string
+      - description: Post Comment
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/comment.NewComment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.DocBaseResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Reply comment
+      tags:
+      - comments
+  /feeds:
+    get:
+      description: Returns a paginated list of public feeds
+      parameters:
+      - description: Pagination cursor
+        in: query
+        name: cursor
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/feed.DocFeedsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: List public feeds
+      tags:
+      - feeds
+    post:
+      consumes:
+      - application/json
+      description: Creates a new feed for the authenticated user
+      parameters:
+      - description: Feed payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/feed.CreateFeedReq'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.DocBaseResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Create a feed
+      tags:
+      - feeds
+  /feeds/{feed_id}/comments:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Feed Id
+        in: path
+        name: feed_id
+        required: true
+        type: string
+      - description: Paginated cursor
+        in: query
+        name: cursor
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/comment.DocCommentsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Get feeds comment
+      tags:
+      - comments
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Feed Id
+        in: path
+        name: feed_id
+        required: true
+        type: string
+      - description: Post Comment
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/comment.NewComment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.DocBaseResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Create comment
+      tags:
+      - comments
+  /feeds/{feed_id}/like:
+    post:
+      description: Like or unlike a feed
+      parameters:
+      - description: Feed ID
+        in: path
+        name: feed_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.DocBaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Toggle feed like
+      tags:
+      - likes
+  /feeds/{id}:
+    get:
+      description: Returns a single feed by ID
+      parameters:
+      - description: Feed ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/feed.DocFeedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Get a single public feed
+      tags:
+      - feeds
+  /profile/{username}:
+    get:
+      description: Returns the public profile of a user by username
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/profile.DocUserProfileResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Get user profile
+      tags:
+      - profile
+  /profile/{username}/comments:
+    get:
+      description: Returns a paginated list of the user's comments
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Pagination cursor
+        in: query
+        name: cursor
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/profile.DocUserFeedCommentResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Get user comments
+      tags:
+      - profile
+  /profile/{username}/feeds:
+    get:
+      description: Returns a paginated list of the user's feeds
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Pagination cursor
+        in: query
+        name: cursor
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/profile.DocUserPublicFeedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Get user feeds
+      tags:
+      - profile
+  /profile/{username}/overview:
+    get:
+      description: Returns a paginated list of the user's activity
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Pagination cursor
+        in: query
+        name: cursor
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/profile.DocUserActivityResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Get user activity overview
+      tags:
+      - profile
+  /upload/presign:
+    get:
+      consumes:
+      - application/json
+      description: Returns a presigned URL for direct upload to R2 storage and the
+        public URL to save in the database
+      parameters:
+      - description: Upload type (avatar, feed)
+        in: query
+        name: type
+        required: true
+        type: string
+      - description: File content type (e.g. image/png, image/jpeg)
+        in: query
+        name: content_type
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/upload.DocPresignResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      security:
+      - SessionAuth: []
+      summary: Get presigned upload URL
+      tags:
+      - upload
+securityDefinitions:
+  SessionAuth:
+    in: cookie
+    name: leaflet_sid
+    type: apiKey
+swagger: "2.0"
