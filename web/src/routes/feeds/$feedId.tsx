@@ -16,7 +16,7 @@ function RouteComponent() {
   const { user } = useRouteContext({ from: '__root__' })
   const { feedId } = Route.useParams()
   const { commentId } = Route.useSearch()
-  const { data: feed, isLoading, isFetching } = useFeedQuery(feedId)
+  const { data: feed, isLoading } = useFeedQuery(feedId)
   const { handleLike } = useLike({ entity: 'feed', feedId })
   const router = useRouter()
 

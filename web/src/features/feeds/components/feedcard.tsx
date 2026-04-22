@@ -43,19 +43,19 @@ export default function FeedCard({
         )}
 
         {/* Content */}
-        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+        <p className="md:text-sm text-xs text-muted-foreground leading-relaxed line-clamp-3">
           {content}
         </p>
 
         {/* Stats */}
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+        <div className="flex items-center gap-4 md:text-sm text-xs text-muted-foreground">
           <LikeButton
             handleLike={handleLike}
             isLiked={is_liked}
             likes={stats.likes}
           />
           <div className="flex items-center gap-2">
-            <MessageSquare className="w-4 h-4" />
+            <MessageSquare className="md:size-4 size-3.5" />
             <span>{stats.comments}</span>
           </div>
         </div>
@@ -68,10 +68,10 @@ export default function FeedCard({
             <AvatarImage src={author.avatar_url} alt={author.fullname} />
             <AvatarFallback>{author.fullname[0]}</AvatarFallback>
           </Avatar>
-          <span className="text-sm font-medium truncate">{author.fullname}</span>
+          <span className="md:text-sm text-xs font-medium truncate">{author.fullname}</span>
         </div>
 
-        <span className="text-xs text-muted-foreground shrink-0 whitespace-nowrap">
+        <span className="md:text-xs text-[10px] text-muted-foreground shrink-0 whitespace-nowrap">
           {formatRelativeTime(created_at)}
         </span>
       </div>

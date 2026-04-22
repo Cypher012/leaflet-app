@@ -29,71 +29,80 @@ export function FeedDetailPage({
   }
 
   return (
-    <div className="section-container max-w-3xl space-y-10">
-      {/* Back button — inline on mobile, absolute on md+ */}
-      <div className="md:absolute md:top-14 md:left-0 pt-4 md:pt-0">
+    <div className="relative section-container max-w-3xl">
+      <div className="absolute top-14 -left-5 -lg:left-5 lg:flex hidden">
         <Button onClick={onBack} variant="secondary" className="size-10">
           <ArrowLeft className="size-5" />
         </Button>
       </div>
 
-      <div className="p-4 md:p-5 space-y-7">
-        <span className="flex text-sm items-center text-muted-foreground">
-          <Dot /> Published {formatRelativeTime(feed.created_at)}
-        </span>
+      {/* Mobile back button */}
+      <div className="lg:hidden flex mt-10">
+        <Button onClick={onBack} variant="secondary" className="size-10">
+          <ArrowLeft className="size-5" />
+        </Button>
+      </div>
 
-        <div className="space-y-4">
-          <h1 className="font-bold text-2xl md:text-3xl text-foreground">
-            {feed.title}
-          </h1>
+      <div className="space-y-10 mt-10">
+        <div className="p-5 space-y-7 relative">
+          <span className="text-muted-foreground md:text-sm text-xs flex items-center absolute top-0 left-3.5">
+            <Dot /> Published {formatRelativeTime(feed.created_at)}
+          </span>
 
-          <div className="flex gap-x-3 md:gap-x-5 items-center">
-            <Avatar className="size-8 md:size-10 shrink-0">
-              <AvatarImage src={feed.author.avatar_url} />
-              <AvatarFallback>
-                {feed.author.fullname[0]}
-              </AvatarFallback>
-            </Avatar>
-            <p className="font-semibold text-foreground truncate">
-              {feed.author.fullname}
-            </p>
+          <div className="space-y-4 mt-5">
+            <h1 className="font-bold md:text-3xl text-2xl text-foreground">
+              {feed.title}
+            </h1>
+
+            <div className="flex md:gap-x-5 gap-x-3 items-center">
+              <Avatar className="md:size-10 size-8">
+                <AvatarImage src={feed.author.avatar_url} />
+                <AvatarFallback>
+                  {feed.author.fullname[0]}
+                </AvatarFallback>
+              </Avatar>
+              <p className="font-semibold md:text-base text-sm text-foreground">
+                {feed.author.fullname}
+              </p>
+            </div>
           </div>
-        </div>
 
-        {feed.feed_image && (
-          <div className="relative aspect-video w-full mx-auto rounded-2xl overflow-hidden">
-            <img
-              src={feed.feed_image}
-              alt={feed.title}
-              className="absolute inset-0 h-full w-full object-cover"
+          {feed.feed_image && (
+            <div className="relative aspect-video max-w-full mx-auto rounded-2xl overflow-hidden">
+              <img
+                src={feed.feed_image}
+                alt={feed.title}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
+          )}
+
+          <p className="text-muted-foreground leading-relaxed md:text-sm text-xs">
+            {feed.content}
+          </p>
+
+          <div className="flex items-center gap-6 text-sm text-muted-foreground">
+            <LikeButton
+              handleLike={onLike}
+              isLiked={feed.is_liked}
+              likes={feed.stats.likes}
             />
+
+            <button
+              onClick={handleScrollToComments}
+              className="flex items-center gap-2"
+            >
+              <MessageSquare className="md:size-4 size-3.5" />
+              <span>{feed.stats.comments}</span>
+            </button>
           </div>
-        )}
+        </div>
 
-        <p className="text-muted-foreground leading-relaxed text-sm">
-          {feed.content}
-        </p>
-
-        <div className="flex items-center gap-6 text-sm text-muted-foreground">
-          <LikeButton
-            handleLike={onLike}
-            isLiked={feed.is_liked}
-            likes={feed.stats.likes}
-          />
-
-          <button
-            onClick={handleScrollToComments}
-            className="flex items-center gap-2"
-          >
-            <MessageSquare className="w-4 h-4" />
-            <span>{feed.stats.comments}</span>
-          </button>
+        <div id="comment-box">
+          <ArchiveDiscussion user={user} commentId={commentId} feedId={feedId} />
         </div>
       </div>
 
-      <div id="comment-box">
-        <ArchiveDiscussion user={user} commentId={commentId} feedId={feedId} />
-      </div>
     </div>
   )
 }

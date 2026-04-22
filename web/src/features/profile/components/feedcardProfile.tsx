@@ -1,9 +1,7 @@
-import { Dot, Heart, Leaf, MessageSquare } from 'lucide-react'
+import { Dot, Leaf, MessageSquare } from 'lucide-react'
 import type { FeedCardProps } from '../types'
 import { formatRelativeTime } from '#/lib/time'
 import { Link } from '@tanstack/react-router'
-import { useLike } from '#/hooks/useLike'
-import LikeButton from '#/components/ui/likeButton'
 import { cn } from '#/lib/utils'
 
 const FeedCardProfile = ({
@@ -33,11 +31,11 @@ const FeedCardProfile = ({
 
         <div className="flex items-center gap-3 text-muted-foreground">
           <div className="flex text-xs items-center gap-2 text-[#7A8C83]">
-           <Leaf className={cn('w-4 h-4', stats.is_liked ? 'text-primary fill-primary' : '')} />
+           <Leaf className={cn('md:size-4 size-3.5', stats.is_liked ? 'text-primary fill-primary' : '')} />
             <span>{stats.like_count}</span>
           </div>
           <button className="flex items-center gap-1.5 text-xs hover:text-foreground transition-colors">
-            <MessageSquare className="size-4" />
+            <MessageSquare className="md:size-4 size-3.5" />
             <span>{stats.comment_count}</span>
           </button>
         </div>
