@@ -24,9 +24,9 @@ const LoginPage = () => {
             <h1 className="font-medium text-3xl">Welcome back</h1>
             <p className="text-foreground">
               Don't have an account?{' '}
-              <Link className="text-primary font-medium" to="/signup">
+              {/* <Link className="text-primary font-medium" to="/signup">
                 Sign up
-              </Link>
+              </Link> */}
             </p>
           </div>
 

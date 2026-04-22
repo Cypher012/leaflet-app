@@ -5,8 +5,6 @@ import { Link } from '@tanstack/react-router'
 import { ArrowRight } from 'lucide-react'
 import { signupFields as fields } from '../constants/input-fields'
 import { Logo } from '#/icons/logo.icon'
-import { GoogleIcon } from '#/icons/google.icon'
-import { GithubIcon } from '#/icons/github.icon'
 import BackButton from './back-button'
 import { OAuthButtons } from './oauth-buttons'
 
@@ -26,9 +24,9 @@ const SignupPage = () => {
             <h1 className="font-medium text-3xl">Create your account</h1>
             <p className="text-foreground">
               Already have an account?{' '}
-              <Link className="text-primary font-medium" to="/login">
+              {/* <Link className="text-primary font-medium" to="/login">
                 Log in
-              </Link>
+              </Link> */}
             </p>
           </div>
 
