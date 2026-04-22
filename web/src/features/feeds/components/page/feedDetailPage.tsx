@@ -30,27 +30,27 @@ export function FeedDetailPage({
 
   return (
     <div className="relative section-container max-w-3xl">
-      <div className="absolute top-14 -left-5 -lg:left-5 lg:flex hidden">
+      <div className="absolute top-14 -left-5 lg:flex hidden">
         <Button onClick={onBack} variant="secondary" className="size-10">
           <ArrowLeft className="size-5" />
         </Button>
       </div>
 
       {/* Mobile back button */}
-      <div className="lg:hidden flex mt-10">
+      <div className="lg:hidden flex mt-10 ml-3">
         <Button onClick={onBack} variant="secondary" className="size-10">
           <ArrowLeft className="size-5" />
         </Button>
       </div>
 
-      <div className="space-y-10 mt-10">
+      <div className="space-y-10 mt-8">
         <div className="p-5 space-y-7 relative">
           <span className="text-muted-foreground md:text-sm text-xs flex items-center absolute top-0 left-3.5">
             <Dot /> Published {formatRelativeTime(feed.created_at)}
           </span>
 
           <div className="space-y-4 mt-5">
-            <h1 className="font-bold md:text-3xl text-2xl text-foreground">
+            <h1 className="font-bold md:text-3xl text-xl text-foreground">
               {feed.title}
             </h1>
 

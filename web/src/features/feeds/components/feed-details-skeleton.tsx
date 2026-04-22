@@ -2,10 +2,10 @@ import { Skeleton } from '#/components/ui/skeleton'
 
 export function FeedDetailSkeleton() {
   return (
-    <div className="relative section-container max-w-3xl space-y-10">
-      <div className="absolute top-14 left-0">
+    <div className="relative section-container max-w-3xl space-y-10 mt-12">
+      {/* <div className="absolute top-14 left-0">
         <Skeleton className="size-10 rounded-full" />
-      </div>
+      </div> */}
 
       <div className="p-5 space-y-7">
         <div className="flex items-center gap-2">

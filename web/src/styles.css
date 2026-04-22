@@ -239,6 +239,6 @@
 
 @layer components {
   .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:py-10;
+    @apply max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 lg:py-10;
   }
 }

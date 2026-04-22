@@ -65,7 +65,7 @@ export const CommentItem = ({
 
       <div className="flex-1 min-w-0 pb-4 space-y-3">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-semibold text-sm text-foreground truncate">
+          <span className="font-semibold md:text-sm text-xs text-foreground truncate">
             {comment.author.fullname}
           </span>
           <span className="text-xs text-muted-foreground shrink-0">
@@ -73,7 +73,7 @@ export const CommentItem = ({
           </span>
         </div>
 
-        <p className="text-sm text-foreground leading-relaxed wrap-break-word">
+        <p className="md:text-sm text-xs text-foreground leading-relaxed wrap-break-word">
           {comment.content}
         </p>
 
@@ -88,7 +88,7 @@ export const CommentItem = ({
           )}
           <button
             onClick={() => setReplyOpen(!replyOpen)}
-            className="text-xs font-semibold tracking-widest text-muted-foreground hover:text-foreground transition-colors uppercase"
+            className="md:text-xs text-[10px] font-semibold tracking-widest text-muted-foreground hover:text-foreground transition-colors uppercase"
           >
             {replyOpen ? 'Cancel' : 'Reply'}
           </button>
