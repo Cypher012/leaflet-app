@@ -1,4 +1,4 @@
-import { Leaf, MessageSquare } from 'lucide-react'
+import { MessageSquare } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { useLike } from '#/hooks/useLike'
 import type { PublicFeed } from '../type'
@@ -22,15 +22,17 @@ export default function FeedCard({
     <Link
       to="/feeds/$feedId"
       params={{ feedId: `${feedId}` }}
-      className={`rounded-4xl bg-muted overflow-hidden`}
+      className="rounded-4xl bg-muted overflow-hidden block"
     >
-      <div className="space-y-6 bg-card p-6 ">
+      <div className="space-y-4 bg-card p-4 md:p-6">
         {/* Title */}
-        <h2 className="text-lg font-semibold">{title}</h2>
+        <h2 className="text-base md:text-lg font-semibold leading-snug">
+          {title}
+        </h2>
 
         {/* Image (optional) */}
         {feed_image && (
-          <div className="relative aspect-video max-w-xl mx-auto rounded-2xl overflow-hidden">
+          <div className="relative aspect-video w-full md:max-w-xl md:mx-auto rounded-2xl overflow-hidden">
             <img
               src={feed_image}
               alt={title}
@@ -41,13 +43,12 @@ export default function FeedCard({
         )}
 
         {/* Content */}
-        <p className="text-sm text-muted-foreground leading-relaxed">
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
           {content}
         </p>
 
         {/* Stats */}
-        <div className="flex items-center gap-6 text-sm text-muted-foreground">
-          {/* <LikeButton /> */}
+        <div className="flex items-center gap-4 text-sm text-muted-foreground">
           <LikeButton
             handleLike={handleLike}
             isLiked={is_liked}
@@ -61,16 +62,16 @@ export default function FeedCard({
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between p-6">
-        <div className="flex items-center gap-3">
-          <Avatar className="w-8 h-8">
+      <div className="flex items-center justify-between gap-2 px-4 py-3 md:px-6 md:py-4">
+        <div className="flex items-center gap-2 min-w-0">
+          <Avatar className="w-7 h-7 md:w-8 md:h-8 shrink-0">
             <AvatarImage src={author.avatar_url} alt={author.fullname} />
             <AvatarFallback>{author.fullname[0]}</AvatarFallback>
           </Avatar>
-          <span className="text-sm font-medium">{author.fullname}</span>
+          <span className="text-sm font-medium truncate">{author.fullname}</span>
         </div>
 
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-muted-foreground shrink-0 whitespace-nowrap">
           {formatRelativeTime(created_at)}
         </span>
       </div>

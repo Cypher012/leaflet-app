@@ -76,9 +76,7 @@ const OverviewPage = ({ username }: { username: string }) => {
 
         <div ref={bottomRef} />
 
-        <div className="flex justify-center items-center">
             {isFetchingNextPage && <PulsarLoader />}
-        </div>
       </div>
     </div>
   )

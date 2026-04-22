@@ -44,7 +44,7 @@ export default function UserMenu({ user }: UserMenuProps) {
         className="flex items-center focus:outline-none"
         whileTap={{ scale: 0.95 }}
       >
-        <div className="h-9 w-9 overflow-hidden rounded-full border-2 border-transparent transition-colors hover:border-primary">
+        <div className="md:size-9 size-8  overflow-hidden rounded-full border-2 border-transparent transition-colors hover:border-primary">
           <img
             src={user.avatar_url}
             alt={user.fullname}
@@ -65,7 +65,7 @@ export default function UserMenu({ user }: UserMenuProps) {
             />
 
             <motion.div
-              className="border-border/30 bg-background absolute right-0 z-50 mt-3 w-64 overflow-hidden rounded-2xl border shadow-2xl"
+              className="border-border/30 bg-background absolute right-0 z-50 mt-3 md:w-64 w-55 overflow-hidden rounded-2xl border shadow-2xl"
               variants={menuVariants}
               initial="closed"
               animate="open"
@@ -73,10 +73,10 @@ export default function UserMenu({ user }: UserMenuProps) {
             >
               <div className="p-4">
                 <div className="mb-4 flex flex-col px-2">
-                  <span className="text-foreground truncate text-sm font-bold">
+                  <span className="text-foreground truncate md:text-sm text-xs font-bold">
                     {user.fullname}
                   </span>
-                  <span className="text-muted-foreground truncate text-xs">
+                  <span className="text-muted-foreground truncate md:text-xs text-[10px]">
                     {user.username}
                   </span>
                 </div>
@@ -84,26 +84,26 @@ export default function UserMenu({ user }: UserMenuProps) {
                 <div className="space-y-1">
                   <UserMenuItem
                     href="/"
-                    icon={<Home className="h-4 w-4" />}
+                    icon={<Home className="md:size-4 size-3.5" />}
                     label="Home"
                     onClick={() => setIsOpen(false)}
                   />
                   <UserMenuItem
                     href="/profile/$username"
                     params={{username: user.username}}
-                    icon={<User className="h-4 w-4" />}
+                    icon={<User className="md:size-4 size-3.5" />}
                     label="Profile"
                     onClick={() => setIsOpen(false)}
                   />
                   <UserMenuItem
                     href="/create"
-                    icon={<SquarePen className="h-4 w-4" />}
+                    icon={<SquarePen className="md:size-4 size-3.5" />}
                     label="Create"
                     onClick={() => setIsOpen(false)}
                   />
                   <UserMenuItem
                     href="/settings"
-                    icon={<Settings className="h-4 w-4" />}
+                    icon={<Settings className="md:size-4 size-3.5" />}
                     label="Settings"
                     onClick={() => setIsOpen(false)}
                   />
@@ -118,9 +118,9 @@ export default function UserMenu({ user }: UserMenuProps) {
                 >
                   <button
                     onClick={logout}
-                    className="text-destructive hover:bg-destructive/10 flex w-full items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+                    className="md:text-sm text-xs text-destructive hover:bg-destructive/10 flex w-full items-center space-x-3 rounded-lg px-3 py-2 font-medium transition-colors"
                   >
-                    <LogOut className="h-4 w-4" />
+                    <LogOut className="md:size-4 size-3.5" />
                     <span>Sign Out</span>
                   </button>
                 </motion.div>
@@ -152,7 +152,7 @@ function UserMenuItem({
         to={href}
         onClick={onClick}
         params={params}
-        className="text-foreground/80 hover:bg-muted hover:text-foreground flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+        className="md:text-sm text-xs text-foreground/80 hover:bg-muted hover:text-foreground flex items-center space-x-3 rounded-lg px-3 py-2 font-medium transition-colors"
       >
         {icon}
         <span>{label}</span>

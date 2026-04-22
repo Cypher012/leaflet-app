@@ -17,9 +17,10 @@ import {
 type SignupModalProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
+  onLogin?:() => void
 }
 
-const SignupModal = ({ open, onOpenChange }: SignupModalProps) => {
+const SignupModal = ({ open, onOpenChange, onLogin }: SignupModalProps) => {
   const form = useSignupForm()
 
   return (
@@ -35,9 +36,15 @@ const SignupModal = ({ open, onOpenChange }: SignupModalProps) => {
           <DialogDescription asChild>
             <p className="text-foreground">
               Already have an account?{' '}
-              <Link className="text-primary font-medium" to="/login">
-                Log in
-              </Link>
+              <button
+                onClick={() => {
+                  onOpenChange(false)
+                  onLogin?.()
+                }}
+                className="text-primary font-medium"
+              >
+                Sign up
+              </button>
             </p>
           </DialogDescription>
         </DialogHeader>

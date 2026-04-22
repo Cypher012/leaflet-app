@@ -29,8 +29,12 @@ export const CommentItem = ({
     feedId,
     commentId: comment.id,
   })
- 
-  const { mutate: postReply, isPending } = useCreateReply(feedId, comment.id, user as FeedComment["author"])
+
+  const { mutate: postReply, isPending } = useCreateReply(
+    feedId,
+    comment.id,
+    user as FeedComment['author'],
+  )
 
   const handleReply = () => {
     if (!replyValue.trim()) return
@@ -38,13 +42,16 @@ export const CommentItem = ({
     setReplyOpen(false)
     postReply({ content: replyValue })
   }
-  
+
   const isOptimistic = comment.id.startsWith('temp-')
 
   return (
-    <div id={`comment-${comment.id}`} className={cn("flex gap-3", isOptimistic && "opacity-50 pointer-events-none")}>
+    <div
+      id={`comment-${comment.id}`}
+      className={cn('flex gap-2 md:gap-3', isOptimistic && 'opacity-50 pointer-events-none')}
+    >
       <div className="flex flex-col items-center">
-        <Avatar className={isReply ? 'size-8' : 'size-10'}>
+        <Avatar className={isReply ? 'size-7 md:size-8' : 'size-8 md:size-10'}>
           <AvatarImage
             src={comment.author.avatar_url}
             alt={comment.author.fullname}
@@ -56,21 +63,21 @@ export const CommentItem = ({
         )}
       </div>
 
-      <div className="flex-1 pb-4 space-y-4">
+      <div className="flex-1 min-w-0 pb-4 space-y-3">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-semibold text-sm text-foreground">
+          <span className="font-semibold text-sm text-foreground truncate">
             {comment.author.fullname}
           </span>
-          <span className="text-xs text-muted-foreground">
+          <span className="text-xs text-muted-foreground shrink-0">
             • {formatRelativeTime(comment.created_at)}
           </span>
         </div>
 
-        <p className="text-sm text-foreground leading-relaxed mt-1">
+        <p className="text-sm text-foreground leading-relaxed wrap-break-word">
           {comment.content}
         </p>
 
-        <div className="flex items-center gap-4 mt-2">
+        <div className="flex items-center gap-3 md:gap-4 flex-wrap">
           {comment.replies.length > 0 && (
             <button
               onClick={() => setCollapsed(!collapsed)}
@@ -85,14 +92,13 @@ export const CommentItem = ({
           >
             {replyOpen ? 'Cancel' : 'Reply'}
           </button>
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <LikeButton
-              handleLike={handleLike}
-              isLiked={comment.stats.is_liked}
-              likes={comment.stats.like_count}
-            />
-          </div>
+          <LikeButton
+            handleLike={handleLike}
+            isLiked={comment.stats.is_liked}
+            likes={comment.stats.like_count}
+          />
         </div>
+
         {replyOpen && (
           <div className="flex flex-col gap-2 mt-3">
             <Textarea
@@ -119,7 +125,7 @@ export const CommentItem = ({
                 size="sm"
                 className="rounded-full px-4 bg-[#1a3a2a] hover:bg-[#1a3a2a]/90 text-white"
               >
-                Post Reply
+                {isPending ? 'Posting...' : 'Post Reply'}
               </Button>
             </div>
           </div>

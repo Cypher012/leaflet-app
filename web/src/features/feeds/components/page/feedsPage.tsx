@@ -4,6 +4,7 @@ import type { PublicFeed } from '../../type'
 import { FeedCardSkeleton } from '#/features/feeds/components/feedcard-skeleton'
 import { useInfiniteScroll } from '#/hooks/useInfiiteScroll'
 import FeedCard from '#/features/feeds/components/feedcard'
+import PulsarLoader from '#/components/web/pulsar-loader'
 
 export default function FeedsPage() {
   const query = useInfiniteQuery(FeedsInfiniteQueryOptions)
@@ -18,10 +19,10 @@ export default function FeedsPage() {
   return (
     <div className="section-container max-w-2xl">
       <div className="space-y-4">
-        <h3 className="text-xs text-muted-foreground font-semibold">
+        <h3 className="text-xs text-muted-foreground font-semibold md:mt-3 mt-16">
           PUBLIC FEED
         </h3>
-        <h1 className="text-4xl font-bold text-foreground">
+        <h1 className="md:text-4xl text-2xl font-bold text-foreground">
           What people are thinking.
         </h1>
       </div>
@@ -34,9 +35,7 @@ export default function FeedsPage() {
         <div ref={bottomRef} />
 
         {isFetchingNextPage && (
-          <p className="text-muted-foreground text-sm text-center mt-6">
-            Loading more...
-          </p>
+          <PulsarLoader/>
         )}
       </div>
     </div>
@@ -55,7 +54,7 @@ function FeedsList({
   }
 
   if (feeds.length === 0) {
-    return <p className="text-muted-foreground text-sm">No feeds yet.</p>
+    return <p className="text-muted-foreground md:text-sm text-xs">No feeds yet.</p>
   }
 
   return feeds.map((post) => <FeedCard key={post.id} {...post} />)

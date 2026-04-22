@@ -29,38 +29,39 @@ export function FeedDetailPage({
   }
 
   return (
-    <div className="relative section-container max-w-3xl space-y-10">
-      <div className="absolute top-14 left-0">
+    <div className="section-container max-w-3xl space-y-10">
+      {/* Back button — inline on mobile, absolute on md+ */}
+      <div className="md:absolute md:top-14 md:left-0 pt-4 md:pt-0">
         <Button onClick={onBack} variant="secondary" className="size-10">
           <ArrowLeft className="size-5" />
         </Button>
       </div>
 
-      <div className="p-5 space-y-7">
+      <div className="p-4 md:p-5 space-y-7">
         <span className="flex text-sm items-center text-muted-foreground">
           <Dot /> Published {formatRelativeTime(feed.created_at)}
         </span>
 
         <div className="space-y-4">
-          <h1 className="font-bold text-3xl text-foreground">
+          <h1 className="font-bold text-2xl md:text-3xl text-foreground">
             {feed.title}
           </h1>
 
-          <div className="flex gap-x-5 items-center">
-            <Avatar className="size-10">
+          <div className="flex gap-x-3 md:gap-x-5 items-center">
+            <Avatar className="size-8 md:size-10 shrink-0">
               <AvatarImage src={feed.author.avatar_url} />
               <AvatarFallback>
                 {feed.author.fullname[0]}
               </AvatarFallback>
             </Avatar>
-            <p className="font-semibold text-foreground">
+            <p className="font-semibold text-foreground truncate">
               {feed.author.fullname}
             </p>
           </div>
         </div>
 
         {feed.feed_image && (
-          <div className="relative aspect-video max-w-full mx-auto rounded-2xl overflow-hidden">
+          <div className="relative aspect-video w-full mx-auto rounded-2xl overflow-hidden">
             <img
               src={feed.feed_image}
               alt={feed.title}

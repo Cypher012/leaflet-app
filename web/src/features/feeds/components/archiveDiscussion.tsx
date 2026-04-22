@@ -18,15 +18,14 @@ const ArchiveDiscussion = ({
 }: {
   user: UserResponse | null
   feedId: string
-  commentId?:string
+  commentId?: string
 }) => {
   const [value, setValue] = useState('')
   const [shouldFetch, setShouldFetch] = useState(false)
   const [done, setDone] = useState(false)
-  const { mutateAsync: postComment, isPending } = useCreateComment(feedId, user as FeedComment["author"])
+  const { mutateAsync: postComment, isPending } = useCreateComment(feedId, user as FeedComment['author'])
   const ref = useRef<HTMLDivElement | null>(null)
-  
-  
+
   const query = useInfiniteQuery({
     ...CommentsInfiniteQueryOptions(feedId),
     enabled: shouldFetch,
@@ -46,38 +45,33 @@ const ArchiveDiscussion = ({
       setShouldFetch(true)
       return
     }
-
     if (isVisible && !shouldFetch) {
       setShouldFetch(true)
     }
   }, [isVisible, commentId, shouldFetch])
-  
+
   useEffect(() => {
     if (!commentId || done) return
-
     const el = document.getElementById(`comment-${commentId}`)
-
     if (el) {
       el.scrollIntoView({ block: 'center' })
       setDone(true)
       return
     }
-
     if (query.hasNextPage && !query.isFetchingNextPage) {
       query.fetchNextPage()
     }
   }, [commentId, comments, query.hasNextPage, query.isFetchingNextPage, done])
-  
+
   const handlePostComment = async () => {
-      if (!value.trim()) return
-      setValue('')
-      postComment({ content: value })
+    if (!value.trim()) return
+    setValue('')
+    postComment({ content: value })
   }
 
-
   return (
-    <div className="p-5">
-      <h2 className="text-2xl font-bold text-foreground mb-6">
+    <div className="p-4 md:p-5">
+      <h2 className="text-xl md:text-2xl font-bold text-foreground mb-6">
         Archive Discussion
       </h2>
 
@@ -86,15 +80,15 @@ const ArchiveDiscussion = ({
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="Add your observation..."
-          className="min-h-28 bg-muted border-0 resize-none text-sm p-5"
+          className="min-h-28 bg-muted border-0 resize-none text-sm p-4 md:p-5"
         />
-        <div className="flex justify-end">
+        <div className="flex justify-end mt-1">
           <Button
             onClick={handlePostComment}
             disabled={isPending || !value.trim()}
-            className="rounded-full px-6 bg-[#1a3a2a] hover:bg-[#1a3a2a]/90 text-white"
+            className="rounded-3xl py-4 px-6 bg-[#1a3a2a] hover:bg-[#1a3a2a]/90 text-white"
           >
-            Post comment
+            {isPending ? 'Posting...' : 'Post comment'}
           </Button>
         </div>
       </div>

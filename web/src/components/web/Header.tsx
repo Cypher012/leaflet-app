@@ -24,10 +24,10 @@ const Header = () => {
       className="flex justify-between items-center py-4 px-6 md:px-8 sticky top-0 z-50 border-b backdrop-blur border-border/20 supports-backdrop-filter:bg-background/60"
     >
       <Link to="/">
-        <Logo className="scale-90" />
+        <Logo className="md:scale-90 scale-80" />
       </Link>
 
-      <div className="space-x-5 md:flex hidden items-center">
+      <div className="space-x-5 flex items-center">
         {user ? (
           <UserMenu user={user} />
         ) : (
@@ -48,7 +48,11 @@ const Header = () => {
         onOpenChange={setLoginOpen}
         onSignup={() => setSignupOpen(true)}
       />
-      <SignupModal open={signupOpen} onOpenChange={setSignupOpen} />
+      <SignupModal
+       open={signupOpen}
+       onOpenChange={setSignupOpen}
+        onLogin={() => setLoginOpen(true)}
+       />
     </header>
   )
 }

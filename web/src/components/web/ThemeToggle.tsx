@@ -19,9 +19,9 @@ export default function ThemeToggle() {
       `}</style>
       <div
         onClick={toggle}
-        className="text-foreground/80 hover:bg-muted hover:text-foreground flex w-full cursor-pointer items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+        className="md:text-sm text-xs text-foreground/80 hover:bg-muted hover:text-foreground flex w-full cursor-pointer items-center space-x-3 rounded-lg px-3 py-2 font-medium transition-colors"
       >
-        <Icon className={`h-4 w-4 ${spinning ? 'icon-spin' : ''}`} />
+        <Icon className={`md:size-4 size-3.5 ${spinning ? 'icon-spin' : ''}`} />
         <span>{mode === 'dark' ? 'Dark' : 'Light'} Mode</span>
         <Switch
           checked={mode === 'dark'}

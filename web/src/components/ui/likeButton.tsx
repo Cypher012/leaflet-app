@@ -18,8 +18,8 @@ const LikeButton = ({handleLike, isLiked, likes}: LikeButtonProps) => {
     }}
     className="flex items-center gap-2"
   >
-    <Leaf className={cn('w-4 h-4', isLiked ? 'text-primary fill-primary' : '')} />
-    <span>{likes}</span>
+    <Leaf className={cn('md:size-4 size-3.5', isLiked ? 'text-primary fill-primary' : '')} />
+    <span className='md:text-sm text-xs'>{likes}</span>
   </button>
   )
 }
