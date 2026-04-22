@@ -1,201 +1,86 @@
-Welcome to your new TanStack Start app!
+# Leaflet Web (`web/`)
 
-# Getting Started
+Frontend for the Leaflet discussion platform.
 
-To run this application:
+## Tech Stack
+
+- React + TanStack Start (SSR) + TanStack Router (file-based) + TanStack Query
+- Tailwind CSS + shadcn/ui components
+- Bundler/dev server: Vite
+- Deploy target: Cloudflare Workers (Wrangler)
+
+## Local Development
+
+This frontend expects to be accessed via `https://leaflet-dev.com` with the API on `https://api.leaflet-dev.com` (repo root `Caddyfile`). This matters because auth uses a cross-subdomain secure cookie (`leaflet_sid`).
+
+### Install & Run
 
 ```bash
 bun install
 bun --bun run dev
 ```
 
-# Building For Production
+Vite runs on `http://localhost:3000`, but the intended dev URL is:
+- `https://leaflet-dev.com` (Caddy reverse-proxies to `localhost:3000`)
 
-To build this application for production:
+### Environment Variables
+
+See `.env.example`:
+
+```txt
+VITE_BASE_API_URL=
+VITE_OAUTH_GITHUB_LOGIN=
+VITE_OAUTH_GOOGLE_LOGIN=
+```
+
+Typical development values (see `.env.development`):
+
+```txt
+VITE_BASE_API_URL=https://api.leaflet-dev.com/api
+VITE_OAUTH_GITHUB_LOGIN=https://api.leaflet-dev.com/api/auth/github
+VITE_OAUTH_GOOGLE_LOGIN=https://api.leaflet-dev.com/api/auth/google
+```
+
+Notes:
+- API calls are made with credentials enabled (`src/lib/axios.ts`), so the browser will send `leaflet_sid`.
+- The dev server proxies `/api/*` requests to `https://api.leaflet-dev.com` (`vite.config.ts`).
+
+## App Structure
+
+- Routes: `src/routes/*` (file-based)
+  - Home: `/_home/` shows the public feed list
+  - Feed details: `/feeds/$feedId`
+  - Profile: `/profile/$username/*`
+  - Auth-gated pages: `src/routes/__protected/*` (redirects guests)
+- Features: `src/features/*`
+  - `feeds`: list, detail, comments, likes, infinite scroll
+  - `create`: create feed (with optional image upload)
+  - `profile`: overview/feeds/comments infinite lists
+  - `auth`: OAuth entry points + login/signup modals
+- API routes/constants: `src/lib/api-routes.ts`
+- “Who am I” preload: `src/lib/auth.ts` (TanStack Start server function reads cookie and calls `/auth/me`)
+
+## Upload Flow (R2)
+
+1. Call `GET /api/upload/presign?type=feed|avatar|comment&content_type=...`
+2. PUT the file directly to `upload_url`
+3. Save `public_url` in the feed/comment payload
+
+Implementation lives in `src/features/create/api/api.ts`.
+
+## Scripts
 
 ```bash
+bun --bun run dev
 bun --bun run build
-```
-
-## Testing
-
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
-
-```bash
 bun --bun run test
-```
-
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `bun install @tailwindcss/vite tailwindcss -D`
-
-## Linting & Formatting
-
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
-
-```bash
 bun --bun run lint
 bun --bun run format
 bun --bun run check
 ```
 
-## Routing
+### Deploy (Workers)
 
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from '@tanstack/react-router'
+```bash
+bun --bun run deploy
 ```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
