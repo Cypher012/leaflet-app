@@ -2,7 +2,7 @@ import { Skeleton } from '#/components/ui/skeleton'
 
 const ProfilePageSkeleton = () => {
   return (
-    <div className="flex w-full gap-3 max-w-5xl mx-auto py-10 sm:px-6 lg:px-4">
+    <div className="flex w-full gap-3 max-w-5xl mx-auto py-10 px-4 sm:px-6 lg:px-4">
       {/* Main content */}
       <div className="flex-1 space-y-8">
         
@@ -44,7 +44,7 @@ const ProfilePageSkeleton = () => {
       </div>
 
       {/* Side content */}
-      <div className="w-64 shrink-0">
+      <div className="w-64 shrink-0 md:flex hidden">
         <div className="border border-border/10 rounded-2xl p-5 space-y-5">
           <Skeleton className="h-5 w-36" />
           <div className="space-y-2">

@@ -50,7 +50,7 @@ export function FeedDetailPage({
           </span>
 
           <div className="space-y-4 mt-5">
-            <h1 className="font-bold md:text-3xl text-xl text-foreground">
+            <h1 className="font-bold md:text-3xl text-2xl text-foreground">
               {feed.title}
             </h1>
 
@@ -77,7 +77,7 @@ export function FeedDetailPage({
             </div>
           )}
 
-          <p className="text-muted-foreground leading-relaxed md:text-sm text-xs">
+          <p className="text-muted-foreground leading-relaxed text-sm">
             {feed.content}
           </p>
 

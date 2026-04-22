@@ -19,15 +19,15 @@ const MainContent = ({
   return (
     <div className="p-3">
       <div className="flex gap-x-5 items-center">
-        <Avatar className="size-20">
+        <Avatar className="md:size-20 size-14">
           <AvatarImage src={profile.avatar_url} alt="avatar_url" />
           <AvatarFallback>{profile.fullname}</AvatarFallback>
         </Avatar>
         <div className="space-y-1">
-          <p className="font-semibold text-foreground text-3xl">
+          <p className="font-semibold text-foreground md:text-3xl text-xl">
             {profile.fullname}
           </p>
-          <p className="text-muted-foreground">{profile.username}</p>
+          <p className="text-muted-foreground md:text-base text-sm">{profile.username}</p>
         </div>
       </div>
       <div className="flex gap-x-3 mt-12 font-medium">
@@ -39,11 +39,11 @@ const MainContent = ({
             activeOptions={{ exact: tab.exact }}
             activeProps={{
               className:
-                'bg-primary text-primary-foreground rounded-md px-4 py-2 text-sm',
+                'bg-primary text-primary-foreground rounded-md px-4 py-2 md:text-sm text-xs',
             }}
             inactiveProps={{
               className:
-                'bg-secondary text-secondary-foreground rounded-md px-4 py-2 text-sm',
+                'bg-secondary text-secondary-foreground rounded-md px-4 py-2 md:text-sm text-xs',
             }}
           >
             {tab.label}

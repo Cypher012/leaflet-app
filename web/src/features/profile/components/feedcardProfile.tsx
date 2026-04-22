@@ -21,11 +21,11 @@ const FeedCardProfile = ({
           {formatRelativeTime(createdAt)}
         </span>
 
-        <h2 className="font-bold text-foreground text-xl leading-snug mt-10">
+        <h2 className="font-bold text-foreground text-base md:text-xl leading-snug mt-10">
           {title}
         </h2>
 
-        <p className="text-sm text-muted-foreground leading-relaxed flex-1 line-clamp-3">
+        <p className="md:text-sm text-xs text-muted-foreground leading-relaxed flex-1 line-clamp-3">
           {content}
         </p>
 
@@ -42,7 +42,7 @@ const FeedCardProfile = ({
       </div>
 
       {image && (
-        <div className="shrink-0 w-36 h-36  rounded-md overflow-hidden">
+        <div className="shrink-0 md:size-36 size-24  rounded-md overflow-hidden">
           <img src={image} alt={title} className="w-full h-full object-cover" />
         </div>
       )}

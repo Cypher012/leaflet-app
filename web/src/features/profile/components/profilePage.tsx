@@ -13,7 +13,7 @@ const ProfilePage = ({ children, username }: { children: React.ReactNode, userna
   }
 
   return (
-    <div className="flex w-full gap-3 max-w-7xl mx-auto py-10 sm:px-6 lg:px-4">
+    <div className="flex w-full gap-3 max-w-7xl mx-auto py-10 px-3 sm:px-6 lg:px-4">
       <div className="w-full max-w-4xl lg:max-w-3xl mx-auto">
         <MainContent profile={profile}>{children}</MainContent>
       </div>
