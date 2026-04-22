@@ -31,20 +31,33 @@ func HomePage(baseUrl string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Leaflet API</title><style>\n                body { font-family: system-ui, sans-serif; max-width: 600px; margin: 60px auto; padding: 0 16px; color: #111; }\n                code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-size: 13px; }\n                a { color: #1D9E75; text-decoration: none; }\n                a:hover { text-decoration: underline; }\n                hr { border: none; border-top: 1px solid #eee; margin: 24px 0; }\n                p { color: #555; line-height: 1.6; }\n            </style></head><body><h1>Leaflet API</h1><p>A public note-card platform API.</p><hr><p>Base URL: <code>https://api.leaflet-dev.com/api</code></p><p><a href=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Leaflet API</title><style>\n                body { font-family: system-ui, sans-serif; max-width: 600px; margin: 60px auto; padding: 0 16px; color: #111; }\n                code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-size: 13px; }\n                a { color: #1D9E75; text-decoration: none; }\n                a:hover { text-decoration: underline; }\n                hr { border: none; border-top: 1px solid #eee; margin: 24px 0; }\n                p { color: #555; line-height: 1.6; }\n            </style></head><body><h1>Leaflet API</h1><p>A public note-card platform API.</p><hr><p>Base URL: <code>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var2 templ.SafeURL
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(baseUrl + docsUrl))
+		var templ_7745c5c3_Var2 string
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(baseUrl)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/homepage.templ`, Line: 25, Col: 57}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/homepage.templ`, Line: 24, Col: 31}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\">→ Swagger documentation</a></p><hr><p>Built with Go · Echo v5 · PostgreSQL</p></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</code></p><p><a href=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 templ.SafeURL
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(baseUrl + docsUrl))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/homepage.templ`, Line: 25, Col: 48}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\">→ Swagger documentation</a></p><hr><p>Built with Go · Echo v5 · PostgreSQL</p></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
