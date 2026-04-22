@@ -25,6 +25,10 @@ func NewRouter(r *echo.Echo, deps types.RouterDeps) {
 		return utils.Render(c, http.StatusOK, views.HomePage(url))
 	})
 
+	r.GET("/health", func(c *echo.Context) error {
+		return c.JSON(http.StatusOK, map[string]string{"status": "ok"})
+	})
+
 	r.GET("/docs/*", echoSwagger.WrapHandler)
 
 	api := r.Group("api")
