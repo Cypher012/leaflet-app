@@ -6,6 +6,7 @@ type AppConfig struct {
 	DatabaseURL        string
 	FrontendURL        string
 	BackendURL         string
+	CookieDomain       string
 	GithubClientID     string
 	GithubClientSecret string
 	GithubCallbackURL  string
@@ -27,6 +28,7 @@ func LoadConfig() (AppConfig, error) {
 		"DATABASE_URL",
 		"FRONTEND_URL",
 		"BACKEND_URL",
+		"COOKIE_DOMAIN",
 		"GITHUB_CLIENT_ID",
 		"GITHUB_CLIENT_SECRET",
 		"GITHUB_CALLBACK_URL",
@@ -50,6 +52,7 @@ func LoadConfig() (AppConfig, error) {
 		DatabaseURL:        envs["DATABASE_URL"],
 		FrontendURL:        envs["FRONTEND_URL"],
 		BackendURL:         envs["BACKEND_URL"],
+		CookieDomain:       envs["COOKIE_DOMAIN"],
 		GithubClientID:     envs["GITHUB_CLIENT_ID"],
 		GithubClientSecret: envs["GITHUB_CLIENT_SECRET"],
 		GithubCallbackURL:  envs["GITHUB_CALLBACK_URL"],

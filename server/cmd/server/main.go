@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"errors"
+	"log"
 	"log/slog"
 	"net/http"
 	"os"
@@ -38,12 +39,17 @@ import (
 // @in cookie
 // @name leaflet_sid
 func main() {
-	logger := logger.NewLogger()
-
-	err := godotenv.Load()
-	if err != nil {
-		logger.Error("Error loading .env file")
+	appEnv := os.Getenv("APP_ENV")
+	if appEnv == "" {
+		appEnv = "development"
 	}
+	if appEnv == "development" {
+		if err := godotenv.Overload(".env", ".env.development"); err != nil {
+			log.Fatalf("env load error: %v", err)
+		}
+	}
+
+	logger := logger.NewLogger()
 
 	cfg, err := config.LoadConfig()
 	if err != nil {

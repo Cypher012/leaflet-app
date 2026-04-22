@@ -96,10 +96,10 @@ func (h *AuthHandler) OAuthCallback(c *echo.Context) error {
 		Name:     "leaflet_sid",
 		Value:    session.Token,
 		Path:     "/",
-		Domain:   "leaflet-dev.com",
+		Domain:   h.cfg.CookieDomain,
 		Expires:  session.ExpiresAt,
 		Secure:   true,
-		SameSite: http.SameSiteLaxMode,
+		SameSite: http.SameSiteNoneMode,
 		HttpOnly: true,
 	})
 
@@ -181,10 +181,10 @@ func (h *AuthHandler) Logout(c *echo.Context) error {
 	c.SetCookie(&http.Cookie{
 		Name:     "leaflet_sid",
 		Value:    "",
-		Domain:   "leaflet-dev.com",
+		Domain:   h.cfg.CookieDomain,
 		HttpOnly: true,
 		Secure:   true,
-		SameSite: http.SameSiteLaxMode,
+		SameSite: http.SameSiteNoneMode,
 		MaxAge:   -1,
 		Expires:  time.Unix(0, 0),
 		Path:     "/",
